@@ -1,0 +1,23 @@
+{
+  "name": "ghost",
+  "version": "1.0.0",
+  "description": "The dictionary game ghost",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConnorBach/Ghost.git"
+  },
+  "author": "Connor Bach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ConnorBach/Ghost/issues"
+  },
+  "homepage": "https://github.com/ConnorBach/Ghost#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  }
+}
