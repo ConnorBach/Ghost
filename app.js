@@ -14,7 +14,20 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-rl.question('Enter a word to lookup: ', (answer) => {
-    console.log(`${answer}`);
-    rl.close();
+//setup dictionary
+var fs = require('fs');
+var dict;
+fs.readFile('dict.json', 'utf8', function (err, data) {
+    if(err) {
+        console.log(err);
+        throw err;
+    }
+
+    dict = JSON.parse(data);
+
+    rl.question('Enter a word to lookup: ', (answer) => {
+        rl.close();
+
+        console.log(answer + ": " + dict[answer]);
+    });
 });
