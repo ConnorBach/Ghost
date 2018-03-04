@@ -11,16 +11,16 @@
     <body class="bg">
         <div class="container">
             <div class="row">
-                <div class="col-md">
+                <div class="col-md" id="count">
                     Users
-                    <ul>
+                    <ul id="users">
                         <li> User 1 </li>
                         <li> User 2 </li>
                     </ul>
                 </div>
                 <div class="panel col-md">
                     Ghost
-                    <div class="card">
+                    <div class="card" id="curWord">
                         <div class="card-body">
                             Example
                         </div>
@@ -28,14 +28,50 @@
                     <div class="form-group">
                         <textarea class="form-control" id="userInput"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-primary" id="submit-btn">Submit</button>
+                    <button type="button" class="btn btn-primary" id="challenge-btn">Challenge</button>
                 </div>
             </div>
         </div>
 
-
+        <!--Dependencies-->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <!--Socket.io-->
+        <script src="/socket.io/socket.io.js"></script>
+
+        <!--Client js-->
+        <script>
+            var socket = io();
+            $('#submit-btn').on('click', function(e) {
+                var msg = $('#userInput').val();
+                socket.emit('letter', msg);
+                socket.emit('pass_turn');
+            });
+
+            $('#challenge-btn').on('click', function(e) {
+                socket.emit('challenge', 'yo');
+            });
+            
+            socket.on('sendLetter', function(data) {
+                //change html with updated server info
+                $('#curWord').text(data);
+            });
+
+            socket.on('updateClients', function(data) {
+                $('#users').text('<li> ' + data + ' </li>');
+            });
+
+            socket.on('updateCount', function(data) {
+                $('#count').text('Users ' + data);
+            });
+    
+            socket.on('your_turn', function() {
+                alert('your turn');
+            });
+
+        </script>
     </body>
 </html>

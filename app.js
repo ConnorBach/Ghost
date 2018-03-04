@@ -18,8 +18,13 @@ const rl = readline.createInterface({
 
 //setup dictionary
 var fs = require('fs');
-var dict;
-fs.readFile('dict.json', 'utf8', function (err, data) {
+var dict = JSON.parse(fs.readFileSync('dict.json', 'utf8'));
+rl.question('Enter a word to lookup: ', (answer) => {
+    rl.close();
+
+    console.log(answer + ": " + dict[answer]);
+});
+/*fs.readFile('dict.json', 'utf8', function (err, data) {
     if(err) {
         console.log(err);
         throw err;
@@ -32,4 +37,4 @@ fs.readFile('dict.json', 'utf8', function (err, data) {
 
         console.log(answer + ": " + dict[answer]);
     });
-});
+});*/
