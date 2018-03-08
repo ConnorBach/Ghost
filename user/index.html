@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -43,7 +43,8 @@
         <script src="/socket.io/socket.io.js"></script>
 
         <!--Client js-->
-        <script>
+        <script src="js/client.js"></script>
+        <!--<script>
             var socket = io();
             $('#submit-btn').on('click', function(e) {
                 var msg = $('#userInput').val();
@@ -67,11 +68,7 @@
             socket.on('updateCount', function(data) {
                 $('#count').text('Users ' + data);
             });
-    
-            socket.on('your_turn', function() {
-                alert('your turn');
-            });
 
-        </script>
+        </script>-->
     </body>
 </html>

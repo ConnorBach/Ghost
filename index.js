@@ -13,8 +13,12 @@ var curTurn = 0;
 //1 minute per turn
 var WAIT = 60000;
 
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
     res.sendFile(__dirname + '/user/index.html');
+});
+
+app.get('/js/client.js', function(req, res){
+    res.sendFile(__dirname + '/user/js/client.js')
 });
 
 function next_turn() {
