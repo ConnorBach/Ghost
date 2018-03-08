@@ -22,3 +22,7 @@ socket.on('updateClients', function(data) {
 socket.on('updateCount', function(data) {
     $('#count').text('Users ' + data);
 });
+
+socet.on('your_turn', function(data) {
+    alert('your turn');
+});

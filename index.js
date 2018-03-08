@@ -50,6 +50,14 @@ io.on('connection', function(socket) {
     //current socket turn
     socket.on('pass_turn', function() {
         console.log('Current Turn ' + curTurn);
+
+        //send word and definition back
+        socket.on('letter', function(data) {
+            curWord = data;
+            io.sockets.emit('sendLetter', data + ' ' + dict[data]);
+            console.log(curTurn);
+        });
+
         if(players[turn] == socket) {
             resetTimeOut();
             next_turn();
@@ -66,13 +74,6 @@ io.on('connection', function(socket) {
         --turn;
         io.sockets.emit('updateCount', players.length);
         console.log("A number of players now ",players.length);
-    });
-
-    //send word and definition back
-    socket.on('letter', function(data) {
-        curWord = data;
-        io.sockets.emit('sendLetter', data + ' ' + dict[data]);
-        console.log(curTurn);
     });
 
     socket.on('challenge', function(data) {
